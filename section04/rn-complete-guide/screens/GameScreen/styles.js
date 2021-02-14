@@ -13,6 +13,25 @@ const styles = StyleSheet.create({
     width: 400,
     maxWidth: '90%',
   },
+  listContainer: {
+    flex: 1,
+    width: '60%',
+  },
+  list: {
+    flexGrow: 1,
+    // alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  listItem: {
+    borderColor: '#ccc',
+    borderWidth: 1,
+    padding: 15,
+    marginVertical: 10,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
 });
 
 export default styles;
