@@ -2,18 +2,16 @@ import { StyleSheet } from 'react-native';
 import Colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
-  header: {
-    width: '100%',
-    height: 90,
-    paddingTop: 36,
+  button: {
     backgroundColor: Colors.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 25,
   },
-  headerTitle: {
+  buttonText: {
     color: 'white',
+    fontFamily: 'open-sans',
     fontSize: 18,
-    fontFamily: 'open-sans-bold',
   },
 });
 

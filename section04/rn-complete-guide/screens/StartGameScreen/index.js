@@ -14,11 +14,14 @@ import Card from './../../components/Card';
 import Input from './../../components/Input';
 import NumberContainer from './../../components/NumberContainer';
 import Colors from './../../constants/colors';
+import BodyText from '../../components/BodyText';
+import TitleText from '../../components/TitleText';
+import MainButton from '../../components/MainButton';
 
-const StartGameScreen = ({ onStartGame }) => {
+const StartGameScreen = props => {
   const [enteredValue, setEnteredValue] = useState('');
   const [confirmed, setConfirmed] = useState(false);
-  const [selectedNumber, setSelectedNumber] = useState('');
+  const [selectedNumber, setSelectedNumber] = useState();
 
   const numberInputHandler = inputText => {
     setEnteredValue(inputText.replace(/[^0-9]/g, ''));
@@ -26,6 +29,7 @@ const StartGameScreen = ({ onStartGame }) => {
 
   const resetInputHandler = () => {
     setEnteredValue('');
+    setConfirmed(false);
   };
 
   const confirmInputHandler = () => {
@@ -33,15 +37,15 @@ const StartGameScreen = ({ onStartGame }) => {
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert(
         'Invalid number!',
-        'Number has to be a number between 1 and 99',
+        'Number has to be a number between 1 and 99.',
         [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]
       );
       return;
     }
-
     setConfirmed(true);
     setSelectedNumber(chosenNumber);
     setEnteredValue('');
+    Keyboard.dismiss();
   };
 
   let confirmedOutput;
@@ -51,10 +55,9 @@ const StartGameScreen = ({ onStartGame }) => {
       <Card style={styles.summaryContainer}>
         <Text>You selected</Text>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <Button
-          title="START GAME"
-          onPress={() => onStartGame(selectedNumber)}
-        />
+        <MainButton onPress={() => props.onStartGame(selectedNumber)}>
+          START GAME
+        </MainButton>
       </Card>
     );
   }
@@ -65,15 +68,15 @@ const StartGameScreen = ({ onStartGame }) => {
         Keyboard.dismiss();
       }}>
       <View style={styles.screen}>
-        <Text style={styles.title}>The Game Screen</Text>
+        <TitleText style={styles.title}>Start a New Game!</TitleText>
         <Card style={styles.inputContainer}>
-          <Text>Select Number</Text>
+          <BodyText>Select a Number</BodyText>
           <Input
             style={styles.input}
             blurOnSubmit
             autoCapitalize="none"
             autoCorrect={false}
-            keyboardType="numeric"
+            keyboardType="number-pad"
             maxLength={2}
             onChangeText={numberInputHandler}
             value={enteredValue}
@@ -83,14 +86,14 @@ const StartGameScreen = ({ onStartGame }) => {
               <Button
                 title="Reset"
                 onPress={resetInputHandler}
-                color={Colors.primary}
+                color={Colors.accent}
               />
             </View>
             <View style={styles.button}>
               <Button
                 title="Confirm"
-                onPress={() => confirmInputHandler()}
-                color={Colors.accent}
+                onPress={confirmInputHandler}
+                color={Colors.primary}
               />
             </View>
           </View>
