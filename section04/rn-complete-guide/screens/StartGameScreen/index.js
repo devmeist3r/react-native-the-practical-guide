@@ -7,6 +7,7 @@ import {
   Keyboard,
   Alert,
 } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles';
 
@@ -83,18 +84,14 @@ const StartGameScreen = props => {
           />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button
-                title="Reset"
-                onPress={resetInputHandler}
-                color={Colors.accent}
-              />
+              <MainButton onPress={resetInputHandler}>
+                <MaterialIcons name="close" size={24} color="white" />
+              </MainButton>
             </View>
             <View style={styles.button}>
-              <Button
-                title="Confirm"
-                onPress={confirmInputHandler}
-                color={Colors.primary}
-              />
+              <MainButton onPress={confirmInputHandler}>
+                <MaterialIcons name="check" size={24} color="white" />
+              </MainButton>
             </View>
           </View>
         </Card>
